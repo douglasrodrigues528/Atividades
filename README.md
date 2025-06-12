@@ -73,3 +73,54 @@ No arquivo gui.py, a criação dos objetos Desktop ou Notebook ocorre dinamicame
 
 O código cliente (a interface gráfica) não precisa conhecer os detalhes da criação dos objetos, apenas utiliza a interface comum Produto.
 Este é um exemplo simples e eficaz do uso do padrão Factory Method para criação de objetos em um sistema orientado a objetos.
+
+
+Documentação Atualizada do Projeto parte 2 - Padrões Estruturais e Melhorias
+
+Visão Geral
+Este projeto implementa um sistema de cadastro de produtos com foco em reutilização, flexibilidade e extensibilidade, utilizando padrões estruturais de design para melhorar a arquitetura e facilitar futuras manutenções e expansões.
+
+Padrões Estruturais Implementados
+
+Decorator:
+Utilizado para adicionar funcionalidades adicionais aos produtos sem modificar suas classes originais.
+As classes DecoratorDesconto e DecoratorGarantia permitem aplicar descontos e garantias aos produtos dinamicamente.
+Exemplo de aplicação no código:
+
+from decorators_pt import DecoratorDesconto, DecoratorGarantia
+from desktop import Desktop
+from categoria import Categoria
+
+cat = Categoria(1, "Eletrônicos")
+desktop = Desktop("Dell XPS", "Preto", 3000.0, cat, "500W")
+
+# Aplicando decoradores
+desktop_com_desconto = DecoratorDesconto(desktop, 10)  # 10% de desconto
+desktop_com_garantia = DecoratorGarantia(desktop_com_desconto, 24)  # 24 meses de garantia
+
+print(desktop_com_garantia.getInformacoes())
+desktop_com_garantia.cadastrar()
+
+Testes Abrangentes
+Foram criados testes unitários para os decoradores, garantindo a correta aplicação de descontos e garantias.
+Testes para a interface gráfica (GUI) foram implementados, cobrindo validação de campos, tratamento de erros e cadastro bem-sucedido para produtos Desktop e Notebook.
+Testes de integração foram adicionados para verificar a interação entre decoradores e o fluxo de cadastro.
+
+Interface Gráfica (GUI)
+Desenvolvida com Tkinter, a GUI permite o cadastro de produtos Desktop e Notebook, com campos específicos para cada tipo.
+A interface valida entradas, exibe mensagens de erro e confirmações, e limpa o formulário após o cadastro.
+Exemplo de uso na GUI:
+# Seleção do tipo de produto e preenchimento dos campos na interface gráfica
+self.tipo_combo['values'] = ("Desktop", "Notebook")
+# Campos específicos para Desktop: Potência da Fonte
+# Campos específicos para Notebook: Tempo de Bateria
+
+Melhorias Realizadas
+
+Implementação de testes unitários e de integração para garantir a robustez do sistema.
+Estruturação do código para suportar facilmente a adição de novos padrões estruturais e funcionalidades.
+
+
+
+
+
